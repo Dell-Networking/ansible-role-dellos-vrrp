@@ -1,0 +1,57 @@
+#jinja2: trim_blocks: True,lstrip_blocks: True
+{##########################################
+Purpose:
+Configure VRRP Interface on OS10 Devices
+
+
+Variable file example:
+---
+# VLAN Interface
+dellos_vrrp:
+    ethernet 1/1/4:
+        - vrrp_group_id: 4
+          virtual_address: 10.2.0.1
+          priority: 120
+          preempt: false
+          state: present
+
+########################################
+#}
+{% if dellos_vrrp is defined and dellos_vrrp %}
+{% for key in dellos_vrrp.keys() %}
+  {% set vrrp_vars = dellos_vrrp[key] %}
+  {% if vrrp_vars %}
+interface {{ key }}
+  {% for group in vrrp_vars %}
+    {% if group.vrrp_group_id is defined and group.vrrp_group_id %}
+      {% if group.state is defined and group.state == "absent" %}
+ no vrrp-group {{ group.vrrp_group_id }}
+      {% else %}
+ vrrp-group {{ group.vrrp_group_id }}
+        {% if group.virtual_address is defined %}
+          {% if group.virtual_address %}
+  virtual-address {{ group.virtual_address }}
+          {% else %}
+  no virtual-address
+          {% endif %}
+        {% endif %}
+        {% if group.preempt is defined %}
+          {% if group.preempt %}
+  preempt
+          {% else %}
+  no preempt
+          {% endif %}
+        {% endif %}
+        {% if group.priority is defined %}
+          {% if group.priority %}
+  priority {{ group.priority }}
+          {% else %}
+  no priority
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% endif %}
+{% endfor %}
+{% endif %}
