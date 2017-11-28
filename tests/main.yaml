@@ -57,40 +57,46 @@ dellos_vrrp:
           enable: true
           priority: 120
           preempt: false
-
-# Sample variables for dellos6 device
-dellos_vrrp:
-    vlan 100:
-        - vrrp_group_id: 4
-          state: present
-          description: "vlan-vrrp4"
-          virtual_address: 10.27.0.2
-          enable: true
-          priority: 102
-          preempt: true
-        - vrrp_group_id : 3
-          state: present
-          description: "vlan-vrrp3"
-          virtual_address: 10.27.0.3
-          enable: true 
-          priority: 103
-          preempt: false
-
 # Sample variables for dellos10 device
+
 dellos_vrrp:
-    ethernet1/1/4:
-        - vrrp_group_id: 4
-          virtual_address: 20.27.0.2
-          priority: 190
+    vrrp:
+      delay_reload: 2
+      version: 3
+    ethernet1/1/1:
+      vrrp_group:
+        - group_id: 2
+          type: ipv6
+          priority: 120
           preempt: false
+          track_interface:
+            - resource_id: 3
+              priority_cost: 25
+              state: present
+          virtual_address:
+            - ip: 2001:4828:5808:ffa3::9
+              state: present
+            - ip: 3001:4828:5808:ffa3::9
+              state: present
+            - ip: 4001:4828:5808:ffa3::9
+              state: absent
+          adv_interval_centisecs: 200
           state: present
-        - vrrp_group_id : 3
-          virtual_address: 20.27.0.3
-          priority: 200
+        - group_id: 4
+          virtual_address:
+            - ip: 4.1.1.1
+              state: present
+            - ip: 4.1.1.2
+              state: present
+            - ip: 4.1.1.3
+              state: absent
+          priority: 120
           preempt: false
+          track_interface:
+            - resource_id: 3
+              priority_cost: 25
+              state: present
+          adv_interval_centisecs: 200
           state: present
-
-
-
-
-
+    vlan100:
+      vrrp_active_active_mode: True
