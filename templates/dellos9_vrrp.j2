@@ -54,7 +54,7 @@ dellos_vrrp:
             state: present
 #########################################}
 {% if dellos_vrrp is defined and dellos_vrrp %}
-{% for key,value in dellos_vrrp.iteritems() %} 
+{% for key,value in dellos_vrrp.items() %} 
 interface {{ key }}
   {% if value %}
   {% if value.vrrp is defined and value.vrrp %}
