@@ -1,6 +1,5 @@
 ---
 # vars file for Dell-Networking.dellos-vrrp, below gives a example configuration
-
 # Sample variables for dellos9 device
 dellos_vrrp:
     fortyGigE 0/28:
@@ -58,7 +57,6 @@ dellos_vrrp:
           priority: 120
           preempt: false
 # Sample variables for dellos10 device
-
 dellos_vrrp:
     vrrp:
       delay_reload: 2
