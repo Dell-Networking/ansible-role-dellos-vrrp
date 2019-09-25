@@ -2,7 +2,6 @@
 {#########################################
 Purpose:
 Configure VRRP Interface on OS6 Devices
-
 Variable file example:
 ---
 # VLAN Interface
@@ -15,7 +14,6 @@ dellos_vrrp:
           enable: true
           priority: 120
           preempt: false
-
 #######################################
 #}
 {% if dellos_vrrp is defined and dellos_vrrp %}
