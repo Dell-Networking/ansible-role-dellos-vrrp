@@ -45,7 +45,7 @@ dellos_vrrp:
       vrrp_active_active_mode: True
 #########################################}
 {% if dellos_vrrp is defined and dellos_vrrp %}
-{% for key,value in dellos_vrrp.iteritems() %}
+{% for key,value in dellos_vrrp.items() %}
 {% if key == "vrrp" %}
     {% if value.delay_reload is defined %}
       {% if value.delay_reload >=0 %}
