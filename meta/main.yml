@@ -14,5 +14,9 @@ galaxy_info:
   galaxy_tags:
     - networking
     - dell 
+    - dellemc
     - emc
-    - os9
+    - dellos9
+    - dellos6
+    - dellos10
+    
