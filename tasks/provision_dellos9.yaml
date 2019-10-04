@@ -3,7 +3,7 @@
  - name: "Generating VRRP configuration for dellos9"
    template:
       src: dellos9_vrrp.j2
-      dest: "{{ build_dir }}/vrrp9_{{hostname}}.conf.part"
+      dest: "{{ build_dir }}/vrrp9_{{ hostname }}.conf.part"
    when: (ansible_network_os is defined and ansible_network_os == "dellos9") and ((dellos_cfg_generate | default('False')) | bool)
 #   notify: save config os9
    register: generate_output
